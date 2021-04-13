@@ -1,4 +1,15 @@
+<P id="notice">
+  <%= notice %>
+</P>
+
 <h2>User info</h2>
+<% if @user.errors.any? %>
+  <%= @user.errors.count %>件のエラーが発生しました
+  <% @user.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+
 <%= form_with model:@user, local:true do |f| %>
   <div class="form-group">
   <label for="user_name">Name</label>
