@@ -29,6 +29,9 @@ before_action :authenticate_user!
 
   def edit
     @book = Book.find(params[:id])
+     unless @user = current_user
+      redirect_to books_path
+     end
   end
 
   def update
