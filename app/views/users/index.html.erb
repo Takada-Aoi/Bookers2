@@ -1,4 +1,3 @@
-<%= render 'users/new',book: @book %>
 <% if @book.errors.any? %>
   <%= @book.errors.count %>件のエラーが発生しました
   <% @book.errors.full_messages.each do |message| %>
@@ -6,7 +5,10 @@
   <% end %>
 <% end %>
 
-<h2>User info</h2>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
+      <h2>User info</h2>
 <%= attachment_image_tag @user,:profile_image,:fill,100,100,format:'jpeg',fallback:"no_image.jpg" %>
 <table class = "table">
   <tbody>
@@ -20,13 +22,15 @@
     </tr>
   </tbody>
 </table>
-<div>
+<div class="row">
   <% if @user.id == current_user.id %>
-  <P><%= link_to "Edit",edit_user_path(@user) %></P>
+  <%= link_to "Edit",edit_user_path(@user),class:"btn btn-outline-secondary btn-block fas fa-user-cog" %>
   <% end %>
 </div>
+<%= render 'users/new',book: @book %>
+</div>
 
-<div>
+<div class="col-md-8 offset-md-1">
  <h2>Users</h2>
   <table class ="table">
     <thead>
@@ -37,14 +41,15 @@
       </tr>
     </thead>
     <tbody>
+      <% @users.each do |user| %>
       <tr>
-        <% @users.each do |user| %>
         <td><%=attachment_image_tag user,:profile_image,:fill,40,40,fallback:"no_image.jpg" %></td>
         <td><%= user.name %></td>
         <td><%= link_to "show",user_path(user.id) %></td>
         <% end %>
       </tr>
-
     </tbody>
-  </table>
+   </table>
+  </div>
+  </div>
 </div>
